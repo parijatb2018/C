@@ -1,0 +1,111 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <conio.h>
+#include <string.h>
+
+void main()
+{
+
+    int n,i,m;   // n is no of people
+    char ds[30]; //dummy string
+
+    char **name;
+    int *ac,*aj;
+
+    float  act, ajt, acst, ajst, gt;
+
+    
+    begin:        // beginning of each run
+
+    printf("How Many People Ordered? ");
+    scanf("%d",&n);
+
+    // dynamic memory allocation for arrays:
+
+    name=(char**)malloc(n*sizeof(char*));  // names array
+
+    ac=(int*)malloc(n*sizeof(int)); // apple cider count array
+
+    aj=(int*)malloc(n*sizeof(int)); // apple juice count array
+
+
+    // Taking inputs:
+
+    for( i=0;i<n;i++)
+    {
+    printf("\nEnter the name of Person #%d: ", (i+1));
+
+    scanf(" %[^\n]s",ds);
+
+    m=strlen(ds);
+
+    *(name+i)= (char*)malloc((strlen(ds)+1)*sizeof(char));
+
+    strcpy(*(name+i),ds);
+
+    printf("How many orders of cider did %s have? " , *(name+i));
+
+    scanf(" %d",(ac+i));
+
+
+    printf("How many orders of juice did %s have? " , *(name+i));
+
+    scanf(" %d",(aj+i));
+
+    }
+
+    //printing individual data and calculating total and avg values
+
+    printf("\n\nNames\t\tCider\tJuice\tSubtotal(Cider)\tSubtotal(Juice)\tTotal");
+    printf("\n---------------------------------------------------------------------");
+
+    act=0, ajt=0, acst=0, ajst=0, gt=0;// declaring initial values as zero
+    for( i=0;i<n;i++)
+    {
+
+    printf("\n%-15.15s\t%5d\t%5d\t$%7.2f\t$%7.2f\t$%7.2f",*(name+i),*(ac+i),*(aj+i),\
+    5.5*ac[i],4.5**(aj+i),(5.5*ac[i]+4.5*aj[i]));
+
+    act=act+ac[i];   // count totals
+    ajt=ajt+aj[i];
+
+    acst=acst+5.5*ac[i];    // subtotals
+    ajst=ajst+4.5**(aj+i);
+
+    gt=gt+(5.5*ac[i]+4.5*aj[i]);   // grand total
+
+
+    }
+
+	 printf("\n---------------------------------------------------------------------");
+
+    //printing total and avg values
+
+    printf("\nTotal\t\t%5.0f\t%5.0f\t$%7.2f\t$%7.2f\t$%7.2f",act,ajt,\
+    acst,ajst,gt);
+
+    printf("\nAverage\t\t%5.2f\t%5.2f\t$%7.2f\t$%7.2f\t$%7.2f\n",act/n,ajt/n,\
+    acst/n,ajst/n,gt/n);
+
+    getch(); // halting before next run option
+
+    printf("\n\nrun it again(y/n)? ");     // optional multi run code block
+    scanf("%s",ds);                         // for continious result extraction
+                                             // without exiting the prog
+    if (strcmp(ds,"y")==0)
+    {
+    //printf("\n");
+    clrscr();
+    goto begin;
+    }
+
+    else
+    exit(0);
+
+
+}  // end main
+
+
+
+
+

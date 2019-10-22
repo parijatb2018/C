@@ -1,0 +1,145 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <conio.h>
+
+void main()
+{
+   int a,b,c, i,j,e=0;   // e is error counter
+   float d;
+   char check[20];
+
+
+   // introduction about the program
+   printf("This program prints out lines of stars.\n\n\n");
+
+
+   errorcheck1: // check for non-negative and non-zero integer value input
+               // for min
+
+   printf("What is the minimum number of stars? ");
+
+   scanf("%s",check);
+
+   a=atoi(check);
+   d=atof(check);
+
+   if( a <= 0||a!=d)
+   {
+   // prompt for putting correct value
+   printf(" input a non-zero positive integer value for min >>\n ");
+
+   e=e+1;
+
+   goto errorcheck1;
+   }
+
+
+   errorcheck2: // check for non-negative and non-zero integer value input
+               //for max
+
+   printf("\nWhat is the maximum number of stars? ");
+
+   scanf("%s",check);
+
+   b=atoi(check);
+   d=atof(check);
+
+   if( b <= 0||b!=d)
+   {
+   // prompt for putting correct value
+   printf(" input a non-zero positive integer valuefor max >>\n ");
+   e=e+1;
+   goto errorcheck2;
+   }
+
+   // check for correct minimum and maximum  inputs
+
+   if (b<a)
+   {
+   // prompt for putting correct min and max values
+   printf(" Max value should be greater than Min value>>>\n\n ");
+   e=e+1;
+   goto errorcheck1;
+   }
+
+
+   errorcheck3: // check for non-negative and non-zero integer value input for
+   				//interval
+
+   printf("\nWhat is the interval? ");
+
+   scanf("%s",check);
+
+   c=atoi(check);
+   d=atof(check);
+
+   if( c <= 0||c!=d)
+   {
+   // prompt for putting correct value
+   printf(" input a non-zero positive integer value for interval >>\n ");
+   e=e+1;
+   goto errorcheck3;
+   }
+
+
+
+
+  	if((e!=0 &&((b-a)%c)>0)||((b-a)%c)>0) // both user input error and mismatch
+                                         //in interval multiplicity occured
+   {
+
+   clrscr();
+
+   printf("This program prints out lines of stars.\n\n\n");
+
+   printf("\nWhat is the maximum number of stars? %d",a);
+
+   printf("\nWhat is the maximum number of stars? %d (modified to %d)",b,b+(c-(b-a)%c));
+
+   printf("\nWhat is the interval? %d",c);
+
+   b=b+(c-(b-a)%c); //modifying the max value, "b" so that the total gap becomes
+                    //a multiple of interval "c"
+                   // and no. of stars for nth row= no. of stars for (n-1)th row + c
+
+   }
+
+   else if(e!=0)     // only user input error occured
+
+   {
+   clrscr();
+
+   printf("This program prints out lines of stars.\n\n\n");
+
+   printf("\nWhat is the maximum number of stars? %d",a);
+
+   printf("\nWhat is the maximum number of stars? %d",b);
+
+   printf("\nWhat is the interval? %d",c);
+
+   }
+
+   printf("\n\n\n");
+
+   for ( i=a; i<=b;i+=c)
+   	{
+        for(j=0;j<=(i-1);j++)
+        {
+          printf("*");
+
+        }
+
+        printf(" (%d stars)\n",j);
+
+        
+      }
+printf("\n\n");
+
+getch();
+
+
+} //end main
+
+
+
+
